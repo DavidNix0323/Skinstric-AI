@@ -87,7 +87,7 @@ export default function AiAccessPage() {
       alt="Diamond Faint"
       width={405.18}
       height={405.18}
-      className="absolute w-[190px] h-[190px] md:w-[405.18px] md:h-[405.18px] animate-spin-slowest origin-center opacity-35"
+      className="absolute w-[190px] h-[190px] md:w-[405.18px] md:h-[405.18px] animate-spin-slowest origin-center opacity-80"
       priority
       unoptimized
     />
@@ -130,7 +130,7 @@ export default function AiAccessPage() {
       alt="Diamond Faint"
       width={405.18}
       height={405.18}
-      className="absolute w-[190px] h-[190px] md:w-[405.18px] md:h-[405.18px] animate-spin-slowest origin-center opacity-35"
+      className="absolute w-[190px] h-[190px] md:w-[405.18px] md:h-[405.18px] animate-spin-slowest origin-center opacity-80"
       priority
       unoptimized
       
