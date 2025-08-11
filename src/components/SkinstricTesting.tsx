@@ -142,12 +142,12 @@ export default function SkinstricTesting() {
                 Processing Submission
               </motion.p>
 
-              <div className="flex justify-center items-center space-x-2 mt-2">
+              <div className="flex justify-center items-center space-x-6 mt-8">
                 {[0, 1, 2].map((i) => (
                   <motion.span
                     key={i}
                     className="w-2 h-2 bg-gray-500 rounded-full"
-                    animate={{ y: [0, -6, 0] }}
+                    animate={{ y: [0, -10, 0] }}
                     transition={{
                       repeat: Infinity,
                       duration: 1.2,
