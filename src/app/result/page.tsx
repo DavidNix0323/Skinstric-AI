@@ -117,37 +117,63 @@ export default function ResultPage() {
       </div>
 
       {/* Back Button */}
-      <div className="fixed bottom-[32px] left-6 sm:left-14 z-10">
-        <Link href="/ai-access" className="group flex items-center gap-[30px]">
-          <motion.div
-            transition={{ duration: 0.3, ease: "easeOut" }}
-            className="relative w-12 h-12"
-          >
-            <motion.span className="absolute right-[20px] bottom-[13px] scale-[0.9] group-hover:scale-[0.92] rotate-180 transition duration-300 ease-in-out">
-              ▶
-            </motion.span>
-            <motion.div className="w-full h-full border border-black rotate-45 group-hover:scale-[0.92] transition duration-300 ease-in-out" />
-          </motion.div>
-          <span className="font-black text-black mr-5 relative">Back</span>
-        </Link>
-      </div>
+<div className="fixed bottom-[32px] left-6 sm:left-14 z-10">
+  <Link href="/ai-access" className="group flex items-center gap-[30px]">
+    <motion.div
+      transition={{ duration: 0.3, ease: "easeOut" }}
+      className="relative w-12 h-12 flex items-center justify-center"
+    >
+      {/* Arrow */}
+      <motion.span className="absolute right-[20px] bottom-[13px] scale-[0.9] group-hover:scale-[0.92] rotate-180 transition duration-300 ease-in-out">
+        ▶
+      </motion.span>
 
-      {/* GET SUMMARY BUTTON */}
-      <div className="fixed bottom-[32px] right-6 sm:right-14 z-10">
-        <Link href="/summary">
-          <button className="group flex items-center gap-[22px]">
-            <span className="text-sm font-black text-black ml-5 relative">
-              GET SUMMARY
-            </span>
-            <motion.div className="relative w-12 h-12">
-              <motion.span className="absolute right-[15px] bottom-[13px] scale-[0.9] group-hover:scale-[0.92] transition duration-300 ease-in-out">
-                ▶
-              </motion.span>
-              <motion.div className="w-full h-full border border-black rotate-45 group-hover:scale-[0.92] transition duration-300 ease-in-out" />
-            </motion.div>
-          </button>
-        </Link>
-      </div>
+      {/* Mobile Text */}
+      <span className="sm:hidden absolute text-[10px] font-bold text-black">
+        Back
+      </span>
+
+      {/* Diamond */}
+      <motion.div className="w-full h-full border border-black rotate-45 group-hover:scale-[0.92] transition duration-300 ease-in-out" />
+    </motion.div>
+
+    {/* Desktop Text */}
+    <span className="hidden sm:inline font-black text-black mr-5 relative top-[1px]">
+      Back
+    </span>
+  </Link>
+</div>
+
+{/* GET SUMMARY BUTTON */}
+<div className="fixed bottom-[32px] right-6 sm:right-14 z-10">
+  <Link href="/summary" className="group flex items-center gap-[20px] flex-row-reverse ">
+    <motion.div
+      transition={{ duration: 0.3, ease: "easeOut" }}
+      className="relative w-12 h-12 flex items-center justify-center"
+    >
+      {/* Arrow */}
+      <motion.span className="absolute left-[20px] bottom-[13px] scale-[0.9] group-hover:scale-[0.92] transition duration-300 ease-in-out">
+        ▶
+      </motion.span>
+
+      {/* Mobile Text */}
+      <span className="sm:hidden absolute text-[10px] font-bold text-black">
+        Get
+      </span>
+
+      {/* Diamond */}
+      <motion.div className="w-full h-full border border-black rotate-45 group-hover:scale-[0.92] transition duration-300 ease-in-out" />
+    </motion.div>
+
+    {/* Desktop Text */}
+    <span className="hidden sm:inline font-black text-black mr-5 relative top-[1px]">
+      Get Summary
+    </span>
+  </Link>
+</div>
+
+
+
     </main>
   );
 }

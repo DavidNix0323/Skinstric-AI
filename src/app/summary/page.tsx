@@ -33,6 +33,12 @@ export default function SummaryPage() {
     return { label, confidence: +(value * 100).toFixed(1) };
   };
 
+  const capitalizeWords = (str: string) =>
+    str
+      .split(" ")
+      .map(word => word.charAt(0).toUpperCase() + word.slice(1))
+      .join(" ");
+
   const activeAgeLabel = selectedAge ?? getTop(summaryData?.age).label;
   const activeConfidence =
     selectedAge && summaryData?.age?.[selectedAge] !== undefined
@@ -58,51 +64,50 @@ export default function SummaryPage() {
           {/* Grid Layout */}
           <div className="grid grid-cols-1 md:grid-cols-[1.5fr_8.5fr_3.15fr] gap-4 mt-10 mb-40 md:gap-4 pb-0 md:pb-0 md:mb-0">
 
-
-          {/* Prediction Boxes */}
-<div className="bg-white-100 space-y-3 md:flex md:flex-col h-auto md:h-[62%]">
-  <div
-    onClick={() => {
-      setSelectedCategory("race");
-      setSelectedLabel(getTop(summaryData.race).label);
-    }}
-    className={`p-3 cursor-pointer flex-1 flex flex-col justify-between border-t hover:bg-[#E1E1E2] ${
-      selectedCategory === "race" ? "bg-[#1A1B1C] text-white hover:bg-black" : "bg-[#F3F3F4]"
-    }`}
-  >
-    <p className="text-base font-semibold">{getTop(summaryData.race).label}</p>
-    <h4 className="text-base font-semibold mb-1">RACE</h4>
-  </div>
-  <div
-    onClick={() => {
-      setSelectedCategory("age");
-      setSelectedLabel(activeAgeLabel);
-    }}
-    className={`p-3 cursor-pointer flex-1 flex flex-col justify-between border-t hover:bg-[#E1E1E2] ${
-      selectedCategory === "age" ? "bg-[#1A1B1C] text-white hover:bg-black" : "bg-[#F3F3F4]"
-    }`}
-  >
-    <p className="text-base font-semibold">{activeAgeLabel}</p>
-    <h4 className="text-base font-semibold mb-1">AGE</h4>
-  </div>
-  <div
-    onClick={() => {
-      setSelectedCategory("gender");
-      setSelectedLabel(getTop(summaryData.gender).label);
-    }}
-    className={`p-3 cursor-pointer flex-1 flex flex-col justify-between border-t hover:bg-[#E1E1E2] ${
-      selectedCategory === "gender" ? "bg-[#1A1B1C] text-white hover:bg-black" : "bg-[#F3F3F4]"
-    }`}
-  >
-    <p className="text-base font-semibold">{getTop(summaryData.gender).label}</p>
-    <h4 className="text-base font-semibold mb-1">SEX</h4>
-  </div>
-</div>
+            {/* Prediction Boxes */}
+            <div className="bg-white-100 space-y-3 md:flex md:flex-col h-auto md:h-[62%] border-t border-black">
+              <div
+                onClick={() => {
+                  setSelectedCategory("race");
+                  setSelectedLabel(getTop(summaryData.race).label);
+                }}
+                className={`p-3 cursor-pointer flex-1 flex flex-col justify-between border-t border-black hover:bg-[#E1E1E2] ${
+                  selectedCategory === "race" ? "bg-[#1A1B1C] text-white hover:bg-black" : "bg-[#F3F3F4]"
+                }`}
+              >
+                <p className="text-base font-semibold">{capitalizeWords(getTop(summaryData.race).label)}</p>
+                <h4 className="text-base font-semibold mb-1">RACE</h4>
+              </div>
+              <div
+                onClick={() => {
+                  setSelectedCategory("age");
+                  setSelectedLabel(activeAgeLabel);
+                }}
+                className={`p-3 cursor-pointer flex-1 flex flex-col justify-between border-t border-black hover:bg-[#E1E1E2] ${
+                  selectedCategory === "age" ? "bg-[#1A1B1C] text-white hover:bg-black" : "bg-[#F3F3F4]"
+                }`}
+              >
+                <p className="text-base font-semibold">{capitalizeWords(activeAgeLabel)}</p>
+                <h4 className="text-base font-semibold mb-1">AGE</h4>
+              </div>
+              <div
+                onClick={() => {
+                  setSelectedCategory("gender");
+                  setSelectedLabel(getTop(summaryData.gender).label);
+                }}
+                className={`p-3 cursor-pointer flex-1 flex flex-col justify-between border-t border-black hover:bg-[#E1E1E2] ${
+                  selectedCategory === "gender" ? "bg-[#1A1B1C] text-white hover:bg-black" : "bg-[#F3F3F4]"
+                }`}
+              >
+                <p className="text-base font-semibold">{capitalizeWords(getTop(summaryData.gender).label)}</p>
+                <h4 className="text-base font-semibold mb-1">SEX</h4>
+              </div>
+            </div>
 
             {/* Confidence Meter */}
-            <div className="relative bg-gray-100 p-4 flex flex-col items-center justify-center md:h-[57vh] md:border-t">
+            <div className="relative bg-gray-100 p-4 flex flex-col items-center justify-center md:h-[57vh] border-t border-black">
               <p className="hidden md:block md:absolute text-[40px] mb-2 left-5 top-2">
-                {selectedLabel}
+                {capitalizeWords(selectedLabel)}
               </p>
               <div className="relative md:absolute w-full max-w-[384px] aspect-square mb-4 md:right-5 md:bottom-2">
                 <div
@@ -148,8 +153,8 @@ export default function SummaryPage() {
               </p>
             </div>
 
-            {/* Breakdown Tabs */}
-<div className="bg-gray-100 pt-4 pb-4 md:border-t">
+{/* Breakdown Tabs */}
+<div className="bg-gray-100 pt-4 pb-4 border-t border-black">
   <div className="space-y-0">
     <div className="flex justify-between px-4">
       <h4 className="text-base leading-[24px] tracking-tight font-medium mb-2">
@@ -157,23 +162,40 @@ export default function SummaryPage() {
       </h4>
       <h4 className="text-base leading-[24px] tracking-tight font-medium mb-2">A.I. CONFIDENCE</h4>
     </div>
-    {Object.entries(summaryData[selectedCategory] ?? {}).map(([label, value]) => (
-      <div
-        key={label}
-        onClick={() => {
-          if (selectedCategory === "age") setSelectedAge(label);
-          setSelectedLabel(label);
-        }}
-        className={`flex items-center justify-between h-[48px] hover:bg-[#E1E1E2] px-4 cursor-pointer ${
-          selectedLabel === label ? "bg-[#1A1B1C] text-white hover:bg-black" : ""
-        }`}
-      >
-        <div className="flex items-center gap-1">
-          <span className="font-normal text-base leading-6 tracking-tight">{label}</span>
+    {Object.entries(summaryData[selectedCategory] ?? {}).map(([label, value]) => {
+      const isSelected = selectedLabel === label;
+      return (
+        <div
+          key={label}
+          onClick={() => {
+            if (selectedCategory === "age") setSelectedAge(label);
+            setSelectedLabel(label);
+          }}
+          className={`flex items-center justify-between h-[48px] hover:bg-[#E1E1E2] px-4 cursor-pointer ${
+            isSelected ? "bg-[#1A1B1C] text-white hover:bg-black" : ""
+          }`}
+        >
+          <div className="flex items-center gap-2">
+            <div className="relative w-4 h-4">
+              <img
+                src={isSelected ? "/activeRadioButton.webp" : "/radioButton.webp"}
+                alt=""
+                className="w-full h-full"
+              />
+              {isSelected && (
+                <div className="absolute top-1/2 left-1/2 w-[6px] h-[6px] bg-white rounded-full transform -translate-x-1/2 -translate-y-1/2" />
+              )}
+            </div>
+            <span className="font-normal text-base leading-6 tracking-tight">
+              {capitalizeWords(label)}
+            </span>
+          </div>
+          <span className="font-normal text-base leading-6 tracking-tight">
+            {(value * 100).toFixed(1)}%
+          </span>
         </div>
-        <span className="font-normal text-base leading-6 tracking-tight">{(value * 100).toFixed(1)}%</span>
-      </div>
-    ))}
+      );
+    })}
   </div>
 </div>
 
