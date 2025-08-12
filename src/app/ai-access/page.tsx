@@ -22,22 +22,35 @@ export default function AiAccessPage() {
   
 
 
-  const handleFileUpload = (e: React.ChangeEvent<HTMLInputElement>) => {
+  const handleFileUpload = async (e: React.ChangeEvent<HTMLInputElement>) => {
     const file = e.target.files?.[0];
     if (!file) return;
-
-    setIsLoading(true); // 👈 Show loading screen
-
+  
+    setIsLoading(true);
+  
     const reader = new FileReader();
-    reader.onloadend = () => {
-      setImageBase64(reader.result as string);
-
-      setTimeout(() => {
-        router.push("/result");
-      }, 1000);
+    reader.onloadend = async () => {
+      const base64 = reader.result as string;
+      setImageBase64(base64);
+  
+      // 🔥 Send to AI immediately
+      const res = await fetch(
+        "https://us-central1-api-skinstric-ai.cloudfunctions.net/skinstricPhaseTwo",
+        {
+          method: "POST",
+          headers: { "Content-Type": "application/json" },
+          body: JSON.stringify({ image: base64 }),
+        }
+      );
+  
+      const json = await res.json();
+      localStorage.setItem("skinstricPhaseTwo", JSON.stringify(json.data));
+  
+      router.push("/result");
     };
     reader.readAsDataURL(file);
   };
+  
 
   const triggerImageUpload = () => {
     fileInputRef.current?.click();

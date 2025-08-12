@@ -35,7 +35,9 @@ export default function ResultPage() {
       {/* Title Block */}
       <div className="relative min-h-[180px]">
         <div className="absolute top-[-40px] left-2 z-10 bg-white px-2 py-1 pointer-events-none">
-          <h1 className="text-md font-bold tracking-wide mb-1">A.I. ANALYSIS</h1>
+          <h1 className="text-md font-bold tracking-wide mb-1">
+            A.I. ANALYSIS
+          </h1>
           <p className="text-sm font-semibold text-gray-700 leading-snug">
             A.I. has estimated the following.
             <br />
@@ -61,14 +63,16 @@ export default function ResultPage() {
         <div className="grid grid-cols-3 grid-rows-3 gap-0 z-10">
           {/* Demographics */}
           <div className="flex items-center justify-center col-start-2">
-            <button
-              onMouseEnter={() => setHovered("demographics")}
-              onMouseLeave={() => setHovered("")}
-              onClick={handleSummary}
-              className="w-[120px] h-[120px] sm:w-[154px] sm:h-[154px] bg-gray-200 hover:bg-gray-300 transform rotate-45 flex items-center justify-center -m-5 cursor-pointer font-semibold leading-[24px] tracking-tight uppercase hover:scale-[1.05] transition-transform duration-300"
-            >
-              <span className="transform -rotate-45">Demographics</span>
-            </button>
+            <Link href="/summary">
+              <button
+                onMouseEnter={() => setHovered("demographics")}
+                onMouseLeave={() => setHovered("")}
+                onClick={handleSummary}
+                className="w-[120px] h-[120px] sm:w-[154px] sm:h-[154px] bg-gray-200 hover:bg-gray-300 transform rotate-45 flex items-center justify-center -m-5 cursor-pointer font-semibold leading-[24px] tracking-tight uppercase hover:scale-[1.05] transition-transform duration-300"
+              >
+                <span className="transform -rotate-45">Demographics</span>
+              </button>
+            </Link>
           </div>
 
           {/* Cosmetic Concerns */}
@@ -130,20 +134,19 @@ export default function ResultPage() {
 
       {/* GET SUMMARY BUTTON */}
       <div className="fixed bottom-[32px] right-6 sm:right-14 z-10">
-        <button
-          onClick={handleSummary}
-          className="group flex items-center gap-[22px]"
-        >
-          <span className="text-sm font-black text-black ml-5 relative">
-            GET SUMMARY
-          </span>
-          <motion.div className="relative w-12 h-12">
-            <motion.span className="absolute right-[15px] bottom-[13px] scale-[0.9] group-hover:scale-[0.92] transition duration-300 ease-in-out">
-              ▶
-            </motion.span>
-            <motion.div className="w-full h-full border border-black rotate-45 group-hover:scale-[0.92] transition duration-300 ease-in-out" />
-          </motion.div>
-        </button>
+        <Link href="/summary">
+          <button className="group flex items-center gap-[22px]">
+            <span className="text-sm font-black text-black ml-5 relative">
+              GET SUMMARY
+            </span>
+            <motion.div className="relative w-12 h-12">
+              <motion.span className="absolute right-[15px] bottom-[13px] scale-[0.9] group-hover:scale-[0.92] transition duration-300 ease-in-out">
+                ▶
+              </motion.span>
+              <motion.div className="w-full h-full border border-black rotate-45 group-hover:scale-[0.92] transition duration-300 ease-in-out" />
+            </motion.div>
+          </button>
+        </Link>
       </div>
     </main>
   );
