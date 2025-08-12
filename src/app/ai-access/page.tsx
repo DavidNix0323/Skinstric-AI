@@ -312,34 +312,39 @@ export default function AiAccessPage() {
               {/* Overlay UI */}
               <div className="relative z-10 flex flex-col items-center justify-center h-full text-white">
                 <div className="fixed top-1/2 right-14 transform -translate-y-1/2 z-10">
-                  <button
-                    onClick={() => {
-                      const video = videoRef.current;
-                      const canvas = canvasRef.current;
-                      if (!video || !canvas) return;
+                <button
+  onClick={() => {
+    const video = videoRef.current;
+    const canvas = canvasRef.current;
+    if (!video || !canvas) return;
 
-                      canvas.width = video.videoWidth;
-                      canvas.height = video.videoHeight;
-                      const ctx = canvas.getContext("2d");
-                      ctx?.drawImage(video, 0, 0, canvas.width, canvas.height);
-                      const imageData = canvas.toDataURL("image/png");
-                      setImageBase64(imageData);
-                      setShowCameraModal(false);
-                      handleSendToAI();
-                    }}
-                    className="group flex items-center gap-4"
-                  >
-                    <span className="font-black text-white relative">
-                      Take Photo
-                    </span>
-                    <img
-                      src="/takePictureIcon.webp"
-                      alt="Take Photo Icon"
-                      width={60}
-                      height={60}
-                      className="w-16 h-16 cursor-pointer group-hover:scale-[0.92] transition duration-300 ease-in-out"
-                    />
-                  </button>
+    canvas.width = video.videoWidth;
+    canvas.height = video.videoHeight;
+    const ctx = canvas.getContext("2d");
+    ctx?.drawImage(video, 0, 0, canvas.width, canvas.height);
+    const imageData = canvas.toDataURL("image/png");
+
+    setImageBase64(imageData);
+    setShowCameraModal(false);
+    handleSendToAI();
+
+    // Freeze image for 2 seconds before redirect
+    setTimeout(() => {
+      window.location.href = "/result";
+    }, 2000);
+  }}
+  className="group flex items-center gap-4"
+>
+  <span className="font-black text-white relative">Take Photo</span>
+  <img
+    src="/takePictureIcon.webp"
+    alt="Take Photo Icon"
+    width={60}
+    height={60}
+    className="w-16 h-16 cursor-pointer group-hover:scale-[0.92] transition duration-300 ease-in-out"
+  />
+</button>
+
                 </div>
 
                 {/* Bottom Instruction Block */}
