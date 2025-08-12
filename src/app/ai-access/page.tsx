@@ -18,8 +18,9 @@ export default function AiAccessPage() {
   const [isHydrated, setIsHydrated] = useState(false);
   const [isLoading, setIsLoading] = useState(false);
 
-  const isMobile =
-    typeof window !== "undefined" && /Mobi|Android/i.test(navigator.userAgent);
+  const isMobile = typeof navigator !== "undefined" && /Mobi|Android/i.test(navigator.userAgent);
+  
+
 
   const handleFileUpload = (e: React.ChangeEvent<HTMLInputElement>) => {
     const file = e.target.files?.[0];
@@ -44,11 +45,14 @@ export default function AiAccessPage() {
 
   const triggerCameraAccess = () => {
     if (isMobile) {
-      cameraInputRef.current?.click();
+      setTimeout(() => {
+        cameraInputRef.current?.click();
+      }, 100); // Prevents modal animation from blocking input
     } else {
       setShowCameraModal(true);
     }
   };
+  
 
   useEffect(() => {
     if (!showCameraModal || !videoRef.current) return;
@@ -83,7 +87,7 @@ export default function AiAccessPage() {
     );
     const json = await res.json();
     localStorage.setItem("skinstricPhaseTwo", JSON.stringify(json.data));
-    router.push("/selfie");
+    router.push("/result");
   };
 
   return (
@@ -493,11 +497,27 @@ export default function AiAccessPage() {
         ))}
       </div>
     </div>
+    {/* Full Header Block */}
+<div className="absolute top-0 left-0 w-full z-[1001] px-6 py-4 bg-white flex items-center justify-between text-[11px] text-[#0F1011]">
+  <div className="flex items-center">
+    <Link
+      href="/"
+      className="inline-flex items-center justify-center gap-2 whitespace-nowrap rounded-md transition-colors h-9 px-4 py-2 font-bold text-[11px] mr-1 leading-[16px] text-[#0F1011] font-geist-sans"
+    >
+      SKINSTRIC
+    </Link>
+    <span className="text-[11px] text-gray-600 leading-[16px]">[ INTRO ]</span>
+  </div>
+  <button className="border border-black bg-black px-2 py-1 rounded-sm text-white text-[9px] font-semibold cursor-default leading-[16px] font-geist-sans">
+    ENTER CODE
+  </button>
+</div>
 
-    {/* Header Label */}
-    <div className="absolute left-10 top-4 text-sm font-bold tracking-wide z-10">
-      TO START ANALYSIS
-    </div>
+{/* TO START ANALYSIS label below header */}
+<div className="absolute top-[64px] left-10 text-sm font-bold tracking-wide z-[1001]">
+  TO START ANALYSIS
+</div>
+
 
     {/* Preview Box */}
     <div className="fixed top-[90px] right-6 md:right-8 z-30">
