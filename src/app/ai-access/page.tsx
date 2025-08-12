@@ -16,6 +16,7 @@ export default function AiAccessPage() {
   const [showCameraModal, setShowCameraModal] = useState(false);
   const [showAccessPrompt, setShowAccessPrompt] = useState(false);
   const [isHydrated, setIsHydrated] = useState(false);
+  const [isLoading, setIsLoading] = useState(false);
 
   const isMobile =
     typeof window !== "undefined" && /Mobi|Android/i.test(navigator.userAgent);
@@ -24,12 +25,19 @@ export default function AiAccessPage() {
     const file = e.target.files?.[0];
     if (!file) return;
 
+    setIsLoading(true); // 👈 Show loading screen
+
     const reader = new FileReader();
     reader.onloadend = () => {
       setImageBase64(reader.result as string);
+
+      setTimeout(() => {
+        router.push("/result");
+      }, 1000);
     };
     reader.readAsDataURL(file);
   };
+
   const triggerImageUpload = () => {
     fileInputRef.current?.click();
   };
@@ -317,18 +325,17 @@ export default function AiAccessPage() {
                   </button>
                 </div>
 
-             {/* Bottom Instruction Block */}
-<div className="absolute bottom-[180px] w-full text-center z-20 px-4">
-  <p className="text-white text-md font-medium mb-2">
-    TO GET BETTER RESULTS MAKE SURE TO HAVE
-  </p>
-  <div className="flex justify-center items-center gap-6 text-white text-sm font-medium">
-    <span>◇ NEUTRAL EXPRESSION</span>
-    <span>◇ FRONTAL POSE</span>
-    <span>◇ ADEQUATE LIGHTING</span>
-  </div>
-</div>
-
+                {/* Bottom Instruction Block */}
+                <div className="absolute bottom-[180px] w-full text-center z-20 px-4">
+                  <p className="text-white text-md font-medium mb-2">
+                    TO GET BETTER RESULTS MAKE SURE TO HAVE
+                  </p>
+                  <div className="flex justify-center items-center gap-6 text-white text-sm font-medium">
+                    <span>◇ NEUTRAL EXPRESSION</span>
+                    <span>◇ FRONTAL POSE</span>
+                    <span>◇ ADEQUATE LIGHTING</span>
+                  </div>
+                </div>
 
                 <canvas ref={canvasRef} className="hidden" />
               </div>
@@ -428,6 +435,107 @@ export default function AiAccessPage() {
             </motion.div>
           )}
         </AnimatePresence>
+        {isLoading && (
+  <div className="fixed inset-0 bg-white z-[999] flex items-center justify-center overflow-hidden">
+    {/* Diamond Spinner Layer */}
+    <div className="absolute w-[600px] h-[600px] animate-spin-slow origin-center z-0">
+      <Image
+        src="/Diamond-dark-small.webp"
+        alt="Diamond Small"
+        width={840}
+        height={840}
+        className="w-full h-full"
+        priority
+        unoptimized
+      />
+    </div>
+    <div className="absolute w-[640px] h-[640px] animate-spin-slower origin-center rotate-[185deg] z-0">
+      <Image
+        src="/Diamond-dark-small.webp"
+        alt="Diamond Medium"
+        width={1160}
+        height={1160}
+        className="w-full h-full"
+        priority
+        unoptimized
+      />
+    </div>
+    <div className="absolute w-[650px] h-[650px] animate-spin-slowest origin-center opacity-35 z-0">
+      <Image
+        src="/Diamond-dark-small.webp"
+        alt="Diamond Faint"
+        width={1440}
+        height={1440}
+        className="w-full h-full"
+        priority
+        unoptimized
+      />
+    </div>
+
+    {/* Centered Text + Dots */}
+    <div className="z-10 flex flex-col items-center">
+      <p className="text-[#1A1B1C] text-sm font-semibold uppercase tracking-wide mb-4 animate-pulse">
+        PREPARING YOUR ANALYSIS...
+      </p>
+      <div className="flex justify-center items-center space-x-6 mt-2">
+        {[0, 1, 2].map((i) => (
+          <motion.span
+            key={i}
+            className="w-2 h-2 bg-[#1A1B1C] rounded-full"
+            animate={{ y: [0, -10, 0] }}
+            transition={{
+              repeat: Infinity,
+              duration: 1.2,
+              delay: i * 0.3,
+              ease: "easeInOut",
+            }}
+          />
+        ))}
+      </div>
+    </div>
+
+    {/* Header Label */}
+    <div className="absolute left-10 top-4 text-sm font-bold tracking-wide z-10">
+      TO START ANALYSIS
+    </div>
+
+    {/* Preview Box */}
+    <div className="fixed top-[90px] right-6 md:right-8 z-30">
+      <h1 className="text-xs md:text-sm font-normal mb-1">Preview</h1>
+      <div className="w-24 h-24 md:w-32 md:h-32 border border-gray-300 overflow-hidden relative rounded bg-white">
+        {imageBase64 ? (
+          <Image
+            src={imageBase64}
+            alt="Uploaded Preview"
+            fill
+            className="object-cover"
+            priority
+            unoptimized
+          />
+        ) : (
+          <div className="w-full h-full flex items-center justify-center text-xs text-gray-400">
+            No Image
+          </div>
+        )}
+      </div>
+    </div>
+
+    {/* Back Button */}
+    <div className="fixed bottom-[32px] left-14 z-10">
+      <Link href="/" className="group flex items-center gap-[30px]">
+        <motion.div transition={{ duration: 0.3, ease: "easeOut" }} className="relative w-12 h-12">
+          <motion.span className="absolute right-[20px] bottom-[13px] scale-[0.9] group-hover:scale-[0.92] rotate-180 transition duration-300 ease-in-out">
+            ▶
+          </motion.span>
+          <motion.div className="w-full h-full border border-black rotate-45 group-hover:scale-[0.92] transition duration-300 ease-in-out" />
+        </motion.div>
+        <span className="font-black text-black mr-5 relative">Back</span>
+      </Link>
+    </div>
+  </div>
+)}
+
+
       </main>
     </>
   );
