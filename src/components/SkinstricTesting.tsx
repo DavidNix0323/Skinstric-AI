@@ -75,7 +75,8 @@ export default function SkinstricTesting() {
   };
 
   return (
-    <section className="relative w-full min-h-screen bg-white font-inter text-[#1A1B1C] overflow-hidden">
+    <section className="relative w-full min-h-screen bg-white font-inter text-[#1A1B1C] sm:overflow-hidden overflow-y-auto pb-[env(safe-area-inset-bottom)] pt-[env(safe-area-inset-top)]">
+
       {/* Diamond Spinner Layer */}
       <div className="fixed inset-0 z-0 pointer-events-none flex items-center justify-center">
         <div className="absolute w-[600px] h-[600px] animate-spin-slow origin-center z-0">

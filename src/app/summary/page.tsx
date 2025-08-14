@@ -202,58 +202,65 @@ export default function SummaryPage() {
         </>
       )}
 
-      {/* Back Button */}
-<div className="fixed bottom-[32px] left-6 sm:left-14 z-10">
-  <Link href="/result" className="group flex items-center gap-[30px]">
-    <motion.div
-      transition={{ duration: 0.3, ease: "easeOut" }}
-      className="relative w-12 h-12"
-    >
-      {/* Diamond shape with mobile label inside */}
-      <motion.div className="w-full h-full border border-black rotate-45 group-hover:scale-[0.92] transition duration-300 ease-in-out">
-        {/* Mobile: BACK label inside diamond */}
-        <div className="absolute inset-0 sm:hidden flex items-center justify-center">
-          <span className="text-[11px] font-bold text-black -rotate-45">Back</span>
-        </div>
-
-        {/* Desktop: Arrow in corner */}
-        <motion.span className="absolute right-[20px] bottom-[13px] scale-[0.9] group-hover:scale-[0.92] rotate-180 transition duration-300 ease-in-out hidden sm:block">
-          ▶
-        </motion.span>
-      </motion.div>
-    </motion.div>
-
-    {/* Desktop: BACK text */}
-    <span className="font-black text-black mr-5 relative hidden sm:inline">Back</span>
-  </Link>
-</div>
-
-      {/* Home Button */}
-<div className="fixed bottom-[32px] right-6 sm:right-14 z-10">
-  <Link href="/">
-    <button className="group flex items-center gap-[30px]">
-      {/* Desktop: HOME text */}
-      <span className="text-sm font-black text-black ml-5 relative hidden sm:inline">
-        HOME
-      </span>
-
-      <motion.div className="relative w-12 h-12">
-        {/* Diamond shape with mobile label inside */}
-        <motion.div className="w-full h-full border border-black rotate-45 group-hover:scale-[0.92] transition duration-300 ease-in-out">
-          {/* Mobile: HOME label inside diamond */}
-          <div className="absolute inset-0 sm:hidden flex items-center justify-center">
-            <span className="text-[11px] font-bold text-black -rotate-45">Home</span>
-          </div>
-
-          {/* Desktop: Arrow in corner */}
-          <motion.span className="absolute right-[15px] bottom-[13px] scale-[0.9] group-hover:scale-[0.92] transition duration-300 ease-in-out hidden sm:block">
-            ▶
-          </motion.span>
-        </motion.div>
-      </motion.div>
-    </button>
-  </Link>
-</div>
+      {/* Bottom-left BACK button */}
+     <div className="fixed bottom-[26px] left-14 z-10 xs:left-4">
+       <Link href="/result" className="group flex items-center gap-[30px]">
+         <motion.div
+           transition={{ duration: 0.3, ease: "easeOut" }}
+           className="relative w-12 h-12"
+         >
+           {/* Diamond shape with mobile label inside */}
+           <motion.div
+             className="w-full h-full border border-black rotate-45 group-hover:scale-[0.92] transition duration-300 ease-in-out"
+           >
+             {/* Mobile: BACK label inside diamond */}
+             <div className="absolute inset-0 sm:hidden flex items-center justify-center">
+               <span className="text-[11px] font-bold text-black -rotate-45">Back</span>
+             </div>
+           </motion.div>
+     
+           {/* Desktop: Arrow in corner */}
+           <motion.span
+             className="absolute right-[20px] bottom-[13px] scale-[0.9] group-hover:scale-[0.92] rotate-180 transition duration-300 ease-in-out hidden sm:block"
+           >
+             ▶
+           </motion.span>
+         </motion.div>
+     
+         {/* Desktop: BACK text */}
+         <span className="font-black text-black mr-5 relative hidden sm:inline">Back</span>
+       </Link>
+     </div>
+     
+     
+     
+     {/* HOME BUTTON */}
+     <div className="fixed bottom-[26px] right-6 sm:right-14 z-10">
+       <Link href="/" className="group flex items-center gap-[20px] flex-row-reverse">
+         <motion.div
+           transition={{ duration: 0.3, ease: "easeOut" }}
+           className="relative w-12 h-12 flex items-center justify-center mt-[12px] sm:mt-0"
+         >
+           {/* Diamond */}
+           <motion.div className="w-full h-full border border-black rotate-45 group-hover:scale-[0.92] transition duration-300 ease-in-out" />
+     
+           {/* Mobile: SUM label inside diamond */}
+           <div className="absolute inset-0 sm:hidden flex items-center justify-center">
+             <span className="text-[11px] font-bold text-black leading-none">HOME</span>
+           </div>
+     
+           {/* Desktop: Arrow in corner */}
+           <motion.span className="absolute right-[15px] bottom-[13px] scale-[0.9] group-hover:scale-[0.92] transition duration-300 ease-in-out hidden sm:block">
+             ▶
+           </motion.span>
+         </motion.div>
+     
+         {/* Desktop: HOME text */}
+         <span className="hidden sm:inline font-black text-black mr-5 relative ">
+           Home
+         </span>
+       </Link>
+     </div>
 
     </main>
   );

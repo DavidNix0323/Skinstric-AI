@@ -50,14 +50,15 @@ export default function AiAccessPage() {
   return (
     <>
       <main className="bg-white text-black min-h-screen flex flex-col items-center justify-center relative overflow-hidden">
-        {/* Hidden input for gallery */}
-        <input
-          type="file"
-          accept="image/*"
-          onChange={handleFileUpload}
-          ref={fileInputRef}
-          className="hidden"
-        />
+      <input
+  type="file"
+  accept="image/*"
+  capture={false}
+  onChange={handleFileUpload}
+  ref={fileInputRef}
+  className="hidden"
+/>
+
 
         {/* Top-left label */}
         <div className="absolute left-10 top-4 text-sm font-bold tracking-wide z-10">
