@@ -117,11 +117,12 @@ export default function ResultPage() {
       </div>
 
      {/* Bottom-left BACK button */}
-<div className="fixed bottom-[32px] left-14 z-10 xs:left-4 xs:bottom-6">
+<div className="fixed bottom-[26px] left-14 z-10 xs:left-4">
   <Link href="/test" className="group flex items-center gap-[30px]">
     <motion.div
       transition={{ duration: 0.3, ease: "easeOut" }}
-      className="relative w-12 h-12"
+      className="relative w-12 h-12 flex items-center justify-center"
+
     >
       {/* Diamond shape with mobile label inside */}
       <motion.div
@@ -149,33 +150,32 @@ export default function ResultPage() {
 
 
 {/* GET SUMMARY BUTTON */}
-<div className="fixed bottom-[32px] right-6 sm:right-14 z-10">
+<div className="fixed bottom-[26px] right-6 sm:right-14 z-10">
   <Link href="/summary" className="group flex items-center gap-[20px] flex-row-reverse">
     <motion.div
       transition={{ duration: 0.3, ease: "easeOut" }}
-      className="relative w-12 h-12 flex items-center justify-center"
+      className="relative w-12 h-12 flex items-center justify-center sm:mt-0"
     >
-      {/* Diamond shape with mobile label inside */}
-      <motion.div className="w-full h-full border border-black rotate-45 group-hover:scale-[0.92] transition duration-300 ease-in-out">
-        {/* Mobile: SUM label inside diamond */}
-        <div className="absolute inset-0 sm:hidden flex items-center justify-center">
-          <span className="text-[10px] font-bold text-black -rotate-45">Sum</span>
-        </div>
+      {/* Diamond */}
+      <motion.div className="w-full h-full border border-black rotate-45 group-hover:scale-[0.92] transition duration-300 ease-in-out" />
 
-        {/* Desktop: Arrow in corner */}
-        <motion.span className="absolute left-[20px] bottom-[13px] scale-[0.9] group-hover:scale-[0.92] rotate-180 transition duration-300 ease-in-out hidden sm:block">
-          ▶
-        </motion.span>
-      </motion.div>
+      {/* Mobile: SUM label inside diamond */}
+      <div className="absolute inset-0 sm:hidden flex items-center justify-center">
+        <span className="text-[11px] font-bold text-black leading-none">Sum</span>
+      </div>
+
+      {/* Desktop: Arrow in corner */}
+      <motion.span className="absolute right-[15px] bottom-[13px] scale-[0.9] group-hover:scale-[0.92] transition duration-300 ease-in-out hidden sm:block">
+        ▶
+      </motion.span>
     </motion.div>
 
     {/* Desktop: GET SUMMARY text */}
-    <span className="hidden sm:inline font-black text-black mr-5 relative top-[1px]">
+    <span className="hidden sm:inline font-black text-black mr-5 relative">
       Get Summary
     </span>
   </Link>
 </div>
-
 
 
 

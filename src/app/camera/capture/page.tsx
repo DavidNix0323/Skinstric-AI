@@ -155,8 +155,11 @@ export default function CameraPage() {
         )}
 
         {hasCaptured && (
-          <div className="fixed inset-0 flex items-center justify-center z-40">
-            <div className="mt-[880px] flex flex-col sm:flex-row gap-4 px-4 w-full max-w-xs sm:max-w-none justify-center items-center">
+          <div className="fixed inset-0 z-40 flex items-end sm:items-center justify-center">
+          <div className="mb-[40px] sm:mt-[880px] flex flex-col sm:flex-row items-center justify-center gap-4 px-4 sm:px-0">
+        
+        
+
               <button
                 onClick={handleRetake}
                 className="px-4 sm:px-6 py-2 bg-gray-700 text-white text-sm sm:text-base font-semibold rounded-sm hover:bg-gray-600 w-full sm:w-auto"
@@ -176,6 +179,27 @@ export default function CameraPage() {
                   "Use This Photo"
                 )}
               </button>
+              {isLoading && (
+  <div className="fixed inset-0 flex flex-col items-center justify-center sm:hidden z-50">
+    <p className="text-white text-sm font-medium mb-2">Analyzing Image...</p>
+    <div className="flex justify-center items-center space-x-3">
+      {[0, 1, 2].map((i) => (
+        <motion.span
+          key={i}
+          className="w-2 h-2 bg-white rounded-full"
+          animate={{ y: [0, -8, 0] }}
+          transition={{
+            repeat: Infinity,
+            duration: 1.2,
+            delay: i * 0.3,
+            ease: "easeInOut",
+          }}
+        />
+      ))}
+    </div>
+  </div>
+)}
+
             </div>
           </div>
         )}
@@ -187,22 +211,22 @@ export default function CameraPage() {
       className="relative w-12 h-12"
     >
       <div className="absolute inset-0 group-hover:scale-[0.92] transition duration-300 ease-in-out">
-        <div className="w-full h-full border border-white rotate-45 flex items-center justify-center">
+        <div className="w-full h-full border border-black rotate-45 flex items-center justify-center">
           {/* Mobile-only Back label */}
-          <span className="sm:hidden rotate-[315deg] text-xs font-bold text-white block">
+          <span className="sm:hidden rotate-[315deg] text-xs font-bold text-black block">
             Back
           </span>
         </div>
 
         {/* Arrow stays untouched */}
-        <span className="hidden sm:block absolute right-[20px] bottom-[13px] scale-[0.9] rotate-180">
+        <span className="hidden sm:block absolute right-[20px] bottom-[13px] text-black scale-[0.9] rotate-180">
           ▶
         </span>
       </div>
     </motion.div>
 
     {/* Desktop-only Back label outside diamond */}
-    <span className="hidden sm:inline font-black text-white mr-5 relative">Back</span>
+    <span className="hidden sm:inline font-black text-black mr-5 relative">Back</span>
   </Link>
 </div>
 
