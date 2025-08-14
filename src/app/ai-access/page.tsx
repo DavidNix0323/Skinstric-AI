@@ -257,11 +257,11 @@ export default function AiAccessPage() {
 <input
   type="file"
   accept="image/*"
-  capture="environment"
   onChange={handleFileUpload}
   ref={fileInputRef}
   className="hidden"
 />
+
 
 {/* Camera Access Prompt Modal */}
 <AnimatePresence>
