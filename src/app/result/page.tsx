@@ -47,74 +47,75 @@ export default function ResultPage() {
       </div>
 
       {/* Diamond Grid with Dynamic Outline */}
-      <div className="relative flex items-center justify-center min-h-[60vh]">
-        {/* Hover Outline Image */}
-        <motion.img
-          src="/diamond-dark-small.webp"
-          alt="Diamond Outline"
-          initial={{ scale: 0.95, opacity: 0 }}
-          animate={{ scale: getOutlineScale(), opacity: hovered ? 1 : 0 }}
-          transition={{ duration: 0.3, ease: "easeOut" }}
-          className="absolute w-[320px] h-[320px] sm:w-[550px] sm:h-[550px] rotate-45 z-0 pointer-events-none"
-          draggable={false}
-        />
+      <div className="relative flex items-center justify-center h-[calc(100vh-80px)] sm:h-[60vh]">
 
-        {/* Diamond Grid */}
-        <div className="grid grid-cols-3 grid-rows-3 gap-0 z-10">
-          {/* Demographics */}
-          <div className="flex items-center justify-center col-start-2">
-            <Link href="/summary">
-              <button
-                onMouseEnter={() => setHovered("demographics")}
-                onMouseLeave={() => setHovered("")}
-                onClick={handleSummary}
-                className="w-[120px] h-[120px] sm:w-[154px] sm:h-[154px] bg-gray-200 hover:bg-gray-300 transform rotate-45 flex items-center justify-center -m-5 cursor-pointer font-semibold leading-[24px] tracking-tight uppercase hover:scale-[1.05] transition-transform duration-300"
-              >
-                <span className="transform -rotate-45">Demographics</span>
-              </button>
-            </Link>
-          </div>
+      {/* Hover Outline Image */}
+  <motion.img
+    src="/diamond-dark-small.webp"
+    alt="Diamond Outline"
+    initial={{ scale: 0.95, opacity: 0 }}
+    animate={{ scale: getOutlineScale(), opacity: hovered ? 1 : 0 }}
+    transition={{ duration: 0.3, ease: "easeOut" }}
+    className="absolute w-[320px] h-[320px] sm:w-[550px] sm:h-[550px] rotate-45 z-0 pointer-events-none"
+    draggable={false}
+  />
 
-          {/* Cosmetic Concerns */}
-          <div className="flex items-center justify-center row-start-2 col-start-1">
-            <button
-              onMouseEnter={() => setHovered("cosmetic")}
-              onMouseLeave={() => setHovered("")}
-              onClick={(e) => e.preventDefault()}
-              aria-disabled="true"
-              className="w-[120px] h-[120px] sm:w-[154px] sm:h-[154px] bg-gray-100 hover:bg-gray-300 transform rotate-45 flex items-center justify-center -m-5 font-semibold leading-[24px] tracking-tight uppercase cursor-not-allowed"
-            >
-              <span className="transform -rotate-45">Cosmetic Concerns</span>
-            </button>
-          </div>
+  {/* Diamond Grid */}
+  <div className="grid grid-cols-3 grid-rows-3 gap-0 z-10">
+    {/* Demographics */}
+    <div className="flex items-center justify-center col-start-2">
+      <Link href="/summary">
+        <button
+          onMouseEnter={() => setHovered("demographics")}
+          onMouseLeave={() => setHovered("")}
+          onClick={handleSummary}
+          className="w-[120px] h-[120px] sm:w-[154px] sm:h-[154px] bg-gray-200 hover:bg-gray-300 transform rotate-45 flex items-center justify-center -m-5 cursor-pointer font-semibold leading-[24px] tracking-tight uppercase hover:scale-[1.05] transition-transform duration-300"
+        >
+          <span className="transform -rotate-45">Demographics</span>
+        </button>
+      </Link>
+    </div>
 
-          {/* Skin Type Details */}
-          <div className="flex items-center justify-center row-start-2 col-start-3">
-            <button
-              onMouseEnter={() => setHovered("skin")}
-              onMouseLeave={() => setHovered("")}
-              onClick={(e) => e.preventDefault()}
-              aria-disabled="true"
-              className="w-[120px] h-[120px] sm:w-[154px] sm:h-[154px] bg-gray-100 hover:bg-gray-300 transform rotate-45 flex items-center justify-center -m-5 font-semibold leading-[24px] tracking-tight uppercase cursor-not-allowed"
-            >
-              <span className="transform -rotate-45">Skin Type Details</span>
-            </button>
-          </div>
+    {/* Cosmetic Concerns */}
+    <div className="flex items-center justify-center row-start-2 col-start-1">
+      <button
+        onMouseEnter={() => setHovered("cosmetic")}
+        onMouseLeave={() => setHovered("")}
+        onClick={(e) => e.preventDefault()}
+        aria-disabled="true"
+        className="w-[120px] h-[120px] sm:w-[154px] sm:h-[154px] bg-gray-100 hover:bg-gray-300 transform rotate-45 flex items-center justify-center -m-5 font-semibold leading-[24px] tracking-tight uppercase cursor-not-allowed"
+      >
+        <span className="transform -rotate-45">Cosmetic Concerns</span>
+      </button>
+    </div>
 
-          {/* Weather */}
-          <div className="flex items-center justify-center row-start-3 col-start-2">
-            <button
-              onMouseEnter={() => setHovered("weather")}
-              onMouseLeave={() => setHovered("")}
-              onClick={(e) => e.preventDefault()}
-              aria-disabled="true"
-              className="w-[120px] h-[120px] sm:w-[154px] sm:h-[154px] bg-gray-100 hover:bg-gray-300 transform rotate-45 flex items-center justify-center -m-5 font-semibold leading-[24px] tracking-tight uppercase cursor-not-allowed"
-            >
-              <span className="transform -rotate-45">Weather</span>
-            </button>
-          </div>
-        </div>
-      </div>
+    {/* Skin Type Details */}
+    <div className="flex items-center justify-center row-start-2 col-start-3">
+      <button
+        onMouseEnter={() => setHovered("skin")}
+        onMouseLeave={() => setHovered("")}
+        onClick={(e) => e.preventDefault()}
+        aria-disabled="true"
+        className="w-[120px] h-[120px] sm:w-[154px] sm:h-[154px] bg-gray-100 hover:bg-gray-300 transform rotate-45 flex items-center justify-center -m-5 font-semibold leading-[24px] tracking-tight uppercase cursor-not-allowed"
+      >
+        <span className="transform -rotate-45">Skin Type Details</span>
+      </button>
+    </div>
+
+    {/* Weather */}
+    <div className="flex items-center justify-center row-start-3 col-start-2">
+      <button
+        onMouseEnter={() => setHovered("weather")}
+        onMouseLeave={() => setHovered("")}
+        onClick={(e) => e.preventDefault()}
+        aria-disabled="true"
+        className="w-[120px] h-[120px] sm:w-[154px] sm:h-[154px] bg-gray-100 hover:bg-gray-300 transform rotate-45 flex items-center justify-center -m-5 font-semibold leading-[24px] tracking-tight uppercase cursor-not-allowed"
+      >
+        <span className="transform -rotate-45">Weather</span>
+      </button>
+    </div>
+  </div>
+</div>
 
      {/* Bottom-left BACK button */}
 <div className="fixed bottom-[26px] left-14 z-10 xs:left-4">
