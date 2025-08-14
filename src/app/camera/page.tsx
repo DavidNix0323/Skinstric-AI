@@ -13,84 +13,88 @@ export default function CameraIntroPage() {
       .then(() => {
         setTimeout(() => {
           router.push("/camera/capture");
-        }, 3000); // Delay to show loading screen
+        }, 3000);
       })
       .catch(() => {
         setAccessDenied(true);
       });
   }, [router]);
-
+  
   return (
-    <main className="bg-black text-white min-h-screen flex flex-col items-center justify-center relative overflow-hidden">
-      
-
+    <main className="min-h-screen flex flex-col items-center justify-center relative overflow-hidden px-4 sm:px-6 max-w-[100vw]">
       {!accessDenied ? (
         <>
-          {/* Spinning Diamonds */}
-          <div className="absolute w-[600px] h-[600px] animate-spin-slow origin-center z-0">
-            <Image
-              src="/Diamond-dark-small.webp"
-              alt="Diamond Small"
-              width={840}
-              height={840}
-              className="w-full h-full"
-              priority
-              unoptimized
-            />
-          </div>
-          <div className="absolute w-[640px] h-[640px] animate-spin-slower origin-center rotate-[185deg] z-0">
-            <Image
-              src="/Diamond-dark-small.webp"
-              alt="Diamond Medium"
-              width={1160}
-              height={1160}
-              className="w-full h-full"
-              priority
-              unoptimized
-            />
-          </div>
-          <div className="absolute w-[650px] h-[650px] animate-spin-slowest origin-center opacity-35 z-0">
-            <Image
-              src="/Diamond-dark-small.webp"
-              alt="Diamond Faint"
-              width={1440}
-              height={1440}
-              className="w-full h-full"
-              priority
-              unoptimized
-            />
+          {/* Spinner Layer */}
+          <div className="absolute inset-0 flex items-center justify-center z-0 -translate-y-[60px] sm:-translate-y-[90px]">
+            <div className="relative w-[300px] sm:w-[540px] h-[300px] sm:h-[540px]">
+              <div className="absolute inset-0 w-[260px] sm:w-[460px] h-[260px] sm:h-[460px] animate-[spin_2s_linear_infinite] opacity-100 m-auto">
+                <Image
+                  src="/Diamond-dark-small.webp"
+                  alt="Diamond 1"
+                  width={600}
+                  height={600}
+                  className="w-full h-full"
+                  priority
+                  unoptimized
+                />
+              </div>
+              <div className="absolute inset-0 w-[280px] sm:w-[500px] h-[280px] sm:h-[500px] animate-[spin_3s_linear_infinite] opacity-90 rotate-[120deg] m-auto">
+                <Image
+                  src="/Diamond-dark-small.webp"
+                  alt="Diamond 2"
+                  width={800}
+                  height={800}
+                  className="w-full h-full"
+                  priority
+                  unoptimized
+                />
+              </div>
+              <div className="absolute inset-0 w-[300px] sm:w-[540px] h-[300px] sm:h-[540px] animate-[spin_4s_linear_infinite] opacity-70 rotate-[240deg] m-auto">
+                <Image
+                  src="/Diamond-dark-small.webp"
+                  alt="Diamond 3"
+                  width={1000}
+                  height={1000}
+                  className="w-full h-full"
+                  priority
+                  unoptimized
+                />
+              </div>
+            </div>
           </div>
 
-          {/* Camera Icon */}
-          <div className="z-10 mb-6">
+          {/* Centered Camera + Text */}
+          <div className="absolute top-[50%] left-1/2 transform -translate-x-1/2 -translate-y-[140px] sm:-translate-y-[180px] z-10 flex flex-col items-center animate-[fadePulse_2s_ease-in-out_infinite]">
             <Image
               src="/camera-icon.webp"
               alt="Camera Icon"
-              width={120}
-              height={120}
+              width={100}
+              height={100}
               priority
               unoptimized
+              className="animate-[float_2.5s_ease-in-out_infinite]"
             />
+            <h1 className="text-xl font-bold mt-6 text-center">
+              SETTING UP CAMERA...
+            </h1>
           </div>
 
-          {/* Loading Text */}
-          <h1 className="text-xl font-bold z-10 mb-4">SETTING UP CAMERA...</h1>
-
           {/* Instruction Block */}
-          <div className="text-center z-10 mb-10">
-            <p className="text-md font-medium mb-2">
+          <div className="absolute top-1/2 translate-y-[160px] sm:translate-y-[200px] z-10 text-center px-4 sm:px-6">
+            <p className="text-sm sm:text-base font-medium mb-3">
               TO GET BETTER RESULTS MAKE SURE TO HAVE
             </p>
-            <div className="flex justify-center items-center gap-6 text-sm font-medium">
+            <div className="flex justify-center items-center gap-2 sm:gap-4 text-xs sm:text-sm font-medium flex-wrap">
               <span>◇ NEUTRAL EXPRESSION</span>
               <span>◇ FRONTAL POSE</span>
               <span>◇ ADEQUATE LIGHTING</span>
             </div>
-          </div>
 
-          {/* Loading Bar */}
-          <div className="absolute bottom-[64px] w-[240px] h-[6px] bg-white bg-opacity-20 rounded-full overflow-hidden z-10">
-            <div className="h-full bg-white animate-pulse rounded-full w-[40%]" />
+            {/* Loading Bar */}
+            <div className="mt-6 w-[240px] h-[6px] bg-black bg-opacity-10 rounded-full overflow-hidden mx-auto">
+  <div className="h-full bg-black rounded-full animate-fill" />
+</div>
+
           </div>
         </>
       ) : (
@@ -118,4 +122,3 @@ export default function CameraIntroPage() {
     </main>
   );
 }
-

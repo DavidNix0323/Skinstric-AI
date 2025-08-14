@@ -145,36 +145,45 @@ export default function CameraPage() {
           </div>
         )}
 
-        {/* Bottom Instruction Block */}
-        {!hasCaptured && (
-          <div className="absolute bottom-[160px] sm:bottom-[180px] w-full text-center z-20 px-4">
-            <p className="text-white text-sm sm:text-md font-medium mb-2">
-              TO GET BETTER RESULTS MAKE SURE TO HAVE
-            </p>
-            <div className="flex flex-wrap justify-center items-center gap-4 sm:gap-6 text-white text-xs sm:text-sm font-medium">
-              <span>◇ NEUTRAL EXPRESSION</span>
-              <span>◇ FRONTAL POSE</span>
-              <span>◇ ADEQUATE LIGHTING</span>
-            </div>
-          </div>
-        )}
+      {/* Bottom-left BACK button */}
+<div className="fixed bottom-[18px] left-14 z-10">
+  <Link href="/ai-access" className="group flex items-center gap-[30px]">
+    <motion.div
+      transition={{ duration: 0.3, ease: "easeOut" }}
+      className="relative w-12 h-12"
+    >
+      {/* Unified hover container */}
+      <div className="absolute inset-0 group-hover:scale-[0.92] transition duration-300 ease-in-out">
+        <div className="w-full h-full border border-white rotate-45" />
+        <span className="absolute right-[20px] bottom-[13px] scale-[0.9] rotate-180">
+          ▶
+        </span>
+      </div>
+    </motion.div>
+    <span className="font-black text-white mr-5 relative">Back</span>
+  </Link>
+</div>
 
-        {/* Back Button */}
-        <div className="fixed bottom-[24px] sm:bottom-[32px] left-6 sm:left-14 z-10">
-          <Link href="/ai-access" className="group flex items-center gap-[20px] sm:gap-[30px]">
-            <motion.div transition={{ duration: 0.3, ease: "easeOut" }} className="relative w-10 h-10 sm:w-12 sm:h-12">
-              <motion.span className="absolute right-[16px] sm:right-[20px] bottom-[10px] sm:bottom-[13px] scale-[0.9] group-hover:scale-[0.92] rotate-180 transition duration-300 ease-in-out">
-                ▶
-              </motion.span>
-              <motion.div className="w-full h-full border border-white rotate-45 group-hover:scale-[0.92] transition duration-300 ease-in-out" />
-            </motion.div>
-            <span className="font-black text-white text-sm sm:text-base mr-3 sm:mr-5 relative">Back</span>
-          </Link>
-        </div>
+
 
         {/* Hidden Canvas */}
         <canvas ref={canvasRef} className="hidden" />
       </div>
+
+      {/* ✅ Bottom Instruction Block (outside overlay container) */}
+      {!hasCaptured && (
+  <div className="absolute bottom-[64px] sm:bottom-[110px] w-full text-center z-20 px-4">
+    <p className="text-white text-sm sm:text-md font-medium mb-2">
+      TO GET BETTER RESULTS MAKE SURE TO HAVE
+    </p>
+    <div className="flex flex-wrap justify-center items-center gap-4 sm:gap-6 text-white text-xs sm:text-sm font-medium">
+      <span>◇ NEUTRAL EXPRESSION</span>
+      <span>◇ FRONTAL POSE</span>
+      <span>◇ ADEQUATE LIGHTING</span>
+    </div>
+  </div>
+)}
+
     </main>
   );
 }

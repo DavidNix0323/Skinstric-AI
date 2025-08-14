@@ -31,11 +31,16 @@ module.exports = {
         "spin-slowest": "spin 85s linear infinite",
         "spin-slower": "spin 70s linear infinite",
         "spin-slow": "spin 55s linear infinite",
+        fill: "fill 2s ease-in-out forwards",
       },
       keyframes: {
         spin: {
           "0%": { transform: "rotate(0deg)" },
           "100%": { transform: "rotate(360deg)" },
+        },
+        fill: {
+          "0%": { width: "0%" },
+          "100%": { width: "100%" },
         },
       },
       rotate: {
