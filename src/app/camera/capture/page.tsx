@@ -180,7 +180,7 @@ export default function CameraPage() {
           </div>
         )}
 
-<div className="fixed bottom-[18px] left-14 z-10">
+        <div className="fixed bottom-[20px] left-4 z-10">
   <Link href="/ai-access" className="group flex items-center gap-[30px]">
     <motion.div
       transition={{ duration: 0.3, ease: "easeOut" }}
