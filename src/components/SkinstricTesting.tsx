@@ -173,18 +173,36 @@ export default function SkinstricTesting() {
         </div>
       </div>
 
-      {/* Bottom-left BACK button */}
-      <div className="fixed bottom-[32px] left-14 z-10">
-        <Link href="/" className="group flex items-center gap-[30px]">
-          <motion.div transition={{ duration: 0.3, ease: "easeOut" }} className="relative w-12 h-12">
-            <motion.span className="absolute right-[20px] bottom-[13px] scale-[0.9] group-hover:scale-[0.92] rotate-180 transition duration-300 ease-in-out">
-              ▶
-            </motion.span>
-            <motion.div className="w-full h-full border border-black rotate-45 group-hover:scale-[0.92] transition duration-300 ease-in-out" />
-          </motion.div>
-          <span className="font-black text-black mr-5 relative">Back</span>
-        </Link>
-      </div>
+    {/* Bottom-left BACK button */}
+<div className="fixed bottom-[32px] left-14 z-10">
+  <Link href="/" className="group flex items-center gap-[30px]">
+    <motion.div
+      transition={{ duration: 0.3, ease: "easeOut" }}
+      className="relative w-12 h-12"
+    >
+      {/* Diamond shape */}
+      <motion.div
+        className="w-full h-full border border-black rotate-45 group-hover:scale-[0.92] transition duration-300 ease-in-out"
+      >
+        {/* Mobile: BACK label inside diamond */}
+        <div className="absolute inset-0 sm:hidden flex items-center justify-center">
+          <span className="text-sm font-black text-black -rotate-45">Back</span>
+        </div>
+      </motion.div>
+
+      {/* Desktop: Arrow in corner */}
+      <motion.span
+        className="absolute right-[20px] bottom-[13px] scale-[0.9] group-hover:scale-[0.92] rotate-180 transition duration-300 ease-in-out hidden sm:block"
+      >
+        ▶
+      </motion.span>
+    </motion.div>
+
+    {/* Desktop: BACK text */}
+    <span className="font-black text-black mr-5 relative hidden sm:inline">Back</span>
+  </Link>
+</div>
+
 
       {/* Bottom-right Proceed button */}
       {showProceed && (

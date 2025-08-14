@@ -20,8 +20,11 @@
 }
 
 html, body {
-  overflow: hidden;
+  overflow-x: hidden;
+  overflow-y: auto;
+  touch-action: manipulation;
 }
+
 
 body {
   background: var(--background);

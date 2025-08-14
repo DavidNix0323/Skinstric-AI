@@ -64,24 +64,25 @@ export default function AiAccessPage() {
           TO START ANALYSIS
         </div>
 
-        {/* Preview Box */}
-        <div className="fixed top-[90px] right-6 md:right-8 z-30">
-          <h1 className="text-xs md:text-sm font-normal mb-1">Preview</h1>
-          <div className="w-24 h-24 md:w-32 md:h-32 border border-gray-300 overflow-hidden relative rounded bg-white">
-            {imageBase64 ? (
-              <Image
-                src={imageBase64}
-                alt="Uploaded Preview"
-                fill
-                className="object-cover"
-                priority
-                unoptimized
-              />
-            ) : (
-              <div className="w-full h-full flex items-center justify-center text-xs text-gray-400" />
-            )}
-          </div>
-        </div>
+       {/* Preview Box */}
+<div className="fixed top-[120px] sm:top-[90px] right-6 md:right-8 z-30">
+  <h1 className="text-xs md:text-sm font-normal mb-1">Preview</h1>
+  <div className="w-24 h-24 md:w-32 md:h-32 border border-gray-300 overflow-hidden relative rounded bg-white">
+    {imageBase64 ? (
+      <Image
+        src={imageBase64}
+        alt="Uploaded Preview"
+        fill
+        className="object-cover"
+        priority
+        unoptimized
+      />
+    ) : (
+      <div className="w-full h-full flex items-center justify-center text-xs text-gray-400" />
+    )}
+  </div>
+</div>
+
 
         {/* Diamond Spinner Layer Left */}
         <div className="fixed top-1/2 left-[10%] md:left-[16%] -translate-y-1/2 z-0 pointer-events-none xs:mt-[50px] xs:ml-[-140px] xs:flex xs:justify-center xs:relative">
@@ -218,21 +219,38 @@ export default function AiAccessPage() {
           </div>
         </div>
 
-        {/* Bottom-left BACK button */}
-<div className="fixed bottom-[32px] left-14 z-10 xs:left-4 xs:bottom-6">
+      {/* Bottom-left BACK button */}
+<div className="fixed bottom-[32px] left-14 z-10">
   <Link href="/test" className="group flex items-center gap-[30px]">
     <motion.div
       transition={{ duration: 0.3, ease: "easeOut" }}
       className="relative w-12 h-12"
     >
-      <motion.span className="absolute right-[20px] bottom-[13px] scale-[0.9] group-hover:scale-[0.92] rotate-180 transition duration-300 ease-in-out">
+      {/* Diamond shape */}
+      <motion.div
+        className="w-full h-full border border-black rotate-45 group-hover:scale-[0.92] transition duration-300 ease-in-out"
+      >
+        {/* Mobile: BACK label inside diamond */}
+        <div className="absolute inset-0 sm:hidden flex items-center justify-center">
+          <span className="text-sm font-black text-black -rotate-45">Back</span>
+        </div>
+      </motion.div>
+
+      {/* Desktop: Arrow in corner */}
+      <motion.span
+        className="absolute right-[20px] bottom-[13px] scale-[0.9] group-hover:scale-[0.92] rotate-180 transition duration-300 ease-in-out hidden sm:block"
+      >
         ▶
       </motion.span>
-      <motion.div className="w-full h-full border border-black rotate-45 group-hover:scale-[0.92] transition duration-300 ease-in-out" />
     </motion.div>
-    <span className="font-black text-black mr-5 relative">Back</span>
+
+    {/* Desktop: BACK text */}
+    <span className="font-black text-black mr-5 relative hidden sm:inline">Back</span>
   </Link>
 </div>
+
+
+
 
 {/* Hidden input for camera capture */}
 <input
@@ -252,22 +270,22 @@ export default function AiAccessPage() {
       animate={{ opacity: 1, scale: 1 }}
       exit={{ opacity: 0, scale: 0.95 }}
       transition={{ duration: 0.3, ease: "easeOut" }}
-      className="absolute top-[420px] left-[580px] w-[352px] z-40 xs:top-[160px] xs:left-1/2 xs:-translate-x-1/2 xs:w-[90%]"
+      className="absolute top-[100px] left-[5%] w-[90%] z-[50] sm:top-[420px] sm:left-[580px] sm:w-[352px] sm:translate-x-0"
     >
       <motion.div
         initial={{ y: 50, opacity: 0 }}
         animate={{ y: 0, opacity: 1 }}
         exit={{ y: 50, opacity: 0 }}
         transition={{ duration: 0.3, ease: "easeOut" }}
-        className="bg-black text-white rounded-lg shadow-xl p-4 w-[360px] h-[140px] text-center relative xs:w-full xs:h-auto xs:px-4 xs:py-6"
+        className="bg-black text-white rounded-lg shadow-xl p-4 w-full h-auto text-center relative sm:w-[360px] sm:h-[140px] sm:px-4 sm:py-6"
       >
         <h2 className="text-sm font-semibold tracking-wide mb-4">
           ALLOW A.I. TO ACCESS YOUR CAMERA
         </h2>
 
-        <div className="absolute bottom-[60px] left-0 w-full h-px bg-white opacity-20 xs:hidden" />
+        <div className="hidden sm:block absolute bottom-[60px] left-0 w-full h-px bg-white opacity-20" />
 
-        <div className="absolute bottom-4 right-4 flex gap-4 xs:static xs:flex-col xs:items-center xs:gap-2">
+        <div className="flex flex-col items-center gap-2 sm:absolute sm:bottom-4 sm:right-4 sm:flex-row sm:gap-4">
           <button
             className="px-5 py-1.5 bg-gray-700 hover:bg-gray-600 text-sm rounded-sm tracking-wide"
             onClick={() => setShowCameraModal(false)}
@@ -285,7 +303,7 @@ export default function AiAccessPage() {
         </div>
 
         <button
-          className="absolute bottom-4 left-6 text-xs text-gray-400 hover:text-white tracking-wide xs:static xs:mt-2"
+          className="mt-2 text-xs text-gray-400 hover:text-white tracking-wide sm:absolute sm:bottom-4 sm:left-6 sm:mt-0"
           onClick={() => setShowCameraModal(false)}
         >
           BACK
@@ -294,6 +312,9 @@ export default function AiAccessPage() {
     </motion.div>
   )}
 </AnimatePresence>
+
+
+
 
 {isLoading && (
   <div className="fixed inset-0 bg-white z-[999] overflow-hidden">
