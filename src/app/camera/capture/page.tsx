@@ -9,6 +9,7 @@ export default function CameraPage() {
   const router = useRouter();
   const [imageBase64, setImageBase64] = useState<string | null>(null);
   const [hasCaptured, setHasCaptured] = useState(false);
+  const [isLoading, setIsLoading] = useState(false);
   const videoRef = useRef<HTMLVideoElement>(null);
   const canvasRef = useRef<HTMLCanvasElement>(null);
 
@@ -46,8 +47,23 @@ export default function CameraPage() {
     setHasCaptured(true);
   };
 
+  const handleRetake = () => {
+    setImageBase64(null);
+    setHasCaptured(false);
+
+    navigator.mediaDevices
+      .getUserMedia({ video: true })
+      .then((stream) => {
+        if (videoRef.current) {
+          videoRef.current.srcObject = stream;
+        }
+      })
+      .catch((err) => console.error("Camera re-init failed:", err));
+  };
+
   const handleConfirm = async () => {
     if (!imageBase64) return;
+    setIsLoading(true);
 
     const res = await fetch(
       "https://us-central1-api-skinstric-ai.cloudfunctions.net/skinstricPhaseTwo",
@@ -65,7 +81,6 @@ export default function CameraPage() {
 
   return (
     <main className="bg-black text-white min-h-screen flex items-center justify-center relative overflow-hidden px-4 sm:px-6 md:px-8">
-      {/* Live Camera Feed */}
       {!hasCaptured && (
         <video
           ref={videoRef}
@@ -75,7 +90,6 @@ export default function CameraPage() {
         />
       )}
 
-      {/* Frozen Image Preview */}
       {hasCaptured && imageBase64 && (
         <motion.div
           initial={{ opacity: 0 }}
@@ -94,21 +108,37 @@ export default function CameraPage() {
         </motion.div>
       )}
 
-      {/* Overlay UI */}
       <div className="relative z-10 flex flex-col items-center justify-center h-full w-full max-w-[480px]">
-        {/* Nice Shot Message */}
-        {hasCaptured && (
-          <motion.div
-            initial={{ opacity: 0, y: -20 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.4, ease: "easeOut" }}
-            className="absolute top-[80px] w-full text-center z-20"
-          >
-            <h2 className="text-white text-xl sm:text-2xl font-bold">Nice Shot!</h2>
-          </motion.div>
-        )}
+      {hasCaptured && (
+  <motion.div
+    initial={{ opacity: 0, y: -60, scale: 0.6 }}
+    animate={{ opacity: 1, y: 0, scale: 1 }}
+    transition={{
+      duration: 0.5,
+      ease: [0.25, 1, 0.5, 1],
+    }}
+    className="fixed top-[80px] sm:top-[120px] left-0 right-0 text-center z-50 pointer-events-none"
+  >
+    <motion.h2
+  initial={{ opacity: 0 }}
+  animate={{ opacity: [0, 1, 0.8, 1] }}
+  transition={{ duration: 0.6, ease: 'easeInOut' }}
+  className="text-white text-xl sm:text-2xl font-bold relative"
+>
+  <span className="absolute inset-0 flex items-center justify-center text-red-500 blur-sm -translate-x-1 -translate-y-1">
+    Nice Shot!
+  </span>
+  <span className="absolute inset-0 flex items-center justify-center text-blue-500 blur-sm translate-x-1 translate-y-1">
+    Nice Shot!
+  </span>
+  <span className="relative z-10">Nice Shot!</span>
+</motion.h2>
 
-        {/* Take Photo Button */}
+  </motion.div>
+)}
+
+
+
         {!hasCaptured && (
           <div className="fixed top-1/2 right-6 sm:right-14 transform -translate-y-1/2 z-10">
             <button onClick={handleCapture} className="group flex items-center gap-4">
@@ -124,66 +154,74 @@ export default function CameraPage() {
           </div>
         )}
 
-        {/* Action Buttons After Capture */}
         {hasCaptured && (
-          <div className="absolute bottom-[100px] sm:bottom-[120px] w-full flex justify-center gap-4 sm:gap-6 z-20 px-4">
-            <button
-              onClick={() => {
-                setImageBase64(null);
-                setHasCaptured(false);
-              }}
-              className="px-4 sm:px-6 py-2 bg-gray-700 text-white text-sm sm:text-base font-semibold rounded-sm hover:bg-gray-600"
-            >
-              Retake
-            </button>
-            <button
-              onClick={handleConfirm}
-              className="px-4 sm:px-6 py-2 bg-green-600 text-white text-sm sm:text-base font-semibold rounded-sm hover:bg-green-500"
-            >
-              Use This Photo
-            </button>
+          <div className="fixed inset-0 flex items-center justify-center z-40">
+            <div className="mt-[880px] flex flex-col sm:flex-row gap-4 px-4 w-full max-w-xs sm:max-w-none justify-center items-center">
+              <button
+                onClick={handleRetake}
+                className="px-4 sm:px-6 py-2 bg-gray-700 text-white text-sm sm:text-base font-semibold rounded-sm hover:bg-gray-600 w-full sm:w-auto"
+              >
+                Retake
+              </button>
+              <button
+                onClick={handleConfirm}
+                disabled={isLoading}
+                className={`px-4 sm:px-6 py-2 bg-green-600 text-white text-sm sm:text-base font-semibold rounded-sm hover:bg-green-500 flex items-center justify-center min-w-[120px] w-full sm:w-auto ${
+                  isLoading ? "opacity-70 cursor-not-allowed" : ""
+                }`}
+              >
+                {isLoading ? (
+                  <div className="w-5 h-5 border-2 border-white border-t-transparent rounded-full animate-spin" />
+                ) : (
+                  "Use This Photo"
+                )}
+              </button>
+            </div>
           </div>
         )}
 
-      {/* Bottom-left BACK button */}
 <div className="fixed bottom-[18px] left-14 z-10">
   <Link href="/ai-access" className="group flex items-center gap-[30px]">
     <motion.div
       transition={{ duration: 0.3, ease: "easeOut" }}
       className="relative w-12 h-12"
     >
-      {/* Unified hover container */}
       <div className="absolute inset-0 group-hover:scale-[0.92] transition duration-300 ease-in-out">
-        <div className="w-full h-full border border-white rotate-45" />
-        <span className="absolute right-[20px] bottom-[13px] scale-[0.9] rotate-180">
+        <div className="w-full h-full border border-white rotate-45 flex items-center justify-center">
+          {/* Mobile-only Back label */}
+          <span className="sm:hidden rotate-[315deg] text-xs font-bold text-white block">
+            Back
+          </span>
+        </div>
+
+        {/* Arrow stays untouched */}
+        <span className="hidden sm:block absolute right-[20px] bottom-[13px] scale-[0.9] rotate-180">
           ▶
         </span>
       </div>
     </motion.div>
-    <span className="font-black text-white mr-5 relative">Back</span>
+
+    {/* Desktop-only Back label outside diamond */}
+    <span className="hidden sm:inline font-black text-white mr-5 relative">Back</span>
   </Link>
 </div>
 
 
-
-        {/* Hidden Canvas */}
         <canvas ref={canvasRef} className="hidden" />
       </div>
 
-      {/* ✅ Bottom Instruction Block (outside overlay container) */}
       {!hasCaptured && (
-  <div className="absolute bottom-[64px] sm:bottom-[110px] w-full text-center z-20 px-4">
-    <p className="text-white text-sm sm:text-md font-medium mb-2">
-      TO GET BETTER RESULTS MAKE SURE TO HAVE
-    </p>
-    <div className="flex flex-wrap justify-center items-center gap-4 sm:gap-6 text-white text-xs sm:text-sm font-medium">
-      <span>◇ NEUTRAL EXPRESSION</span>
-      <span>◇ FRONTAL POSE</span>
-      <span>◇ ADEQUATE LIGHTING</span>
-    </div>
-  </div>
-)}
-
+        <div className="absolute bottom-[64px] sm:bottom-[110px] w-full text-center z-20 px-4">
+          <p className="text-white text-sm sm:text-md font-medium mb-2">
+            TO GET BETTER RESULTS MAKE SURE TO HAVE
+          </p>
+          <div className="flex flex-wrap justify-center items-center gap-4 sm:gap-6 text-white text-xs sm:text-sm font-medium">
+            <span>◇ NEUTRAL EXPRESSION</span>
+            <span>◇ FRONTAL POSE</span>
+            <span>◇ ADEQUATE LIGHTING</span>
+          </div>
+        </div>
+      )}
     </main>
   );
 }
