@@ -50,8 +50,9 @@ export default function ResultPage() {
       <div className="relative flex items-center justify-center h-[calc(100vh-80px)] sm:h-[60vh]">
 
       {/* Hover Outline Image */}
+      {hovered && (
   <motion.img
-    src="/diamond-dark-small.webp"
+    src="/Diamond-dark-small.webp"
     alt="Diamond Outline"
     initial={{ scale: 0.95, opacity: 0 }}
     animate={{ scale: getOutlineScale(), opacity: hovered ? 1 : 0 }}
@@ -59,6 +60,8 @@ export default function ResultPage() {
     className="absolute w-[320px] h-[320px] sm:w-[550px] sm:h-[550px] rotate-45 z-0 pointer-events-none"
     draggable={false}
   />
+)}
+
 
   {/* Diamond Grid */}
   <div className="grid grid-cols-3 grid-rows-3 gap-0 z-10">

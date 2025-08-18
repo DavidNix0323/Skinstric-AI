@@ -156,7 +156,8 @@ export default function CameraPage() {
 
         {hasCaptured && (
           <div className="fixed inset-0 z-40 flex items-end sm:items-center justify-center">
-          <div className="mb-[40px] sm:mt-[880px] flex flex-col sm:flex-row items-center justify-center gap-4 px-4 sm:px-0">
+         <div className="mb-[40px] mt-auto sm:mt-[120px] flex flex-col sm:flex-row items-center justify-center gap-4 px-4 sm:px-0">
+
         
         
 
@@ -213,13 +214,13 @@ export default function CameraPage() {
       <div className="absolute inset-0 group-hover:scale-[0.92] transition duration-300 ease-in-out">
         <div className="w-full h-full border border-black rotate-45 flex items-center justify-center">
           {/* Mobile-only Back label */}
-          <span className="sm:hidden rotate-[315deg] text-xs font-bold text-black block">
+          <span className="sm:hidden rotate-[315deg] text-xs font-bold text-white block">
             Back
           </span>
         </div>
 
         {/* Arrow stays untouched */}
-        <span className="hidden sm:block absolute right-[20px] bottom-[13px] text-black scale-[0.9] rotate-180">
+        <span className="hidden sm:block absolute right-[20px] bottom-[13px] text-white scale-[0.9] rotate-180">
           ▶
         </span>
       </div>
