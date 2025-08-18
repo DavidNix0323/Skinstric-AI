@@ -212,7 +212,7 @@ export default function CameraPage() {
       className="relative w-12 h-12"
     >
       <div className="absolute inset-0 group-hover:scale-[0.92] transition duration-300 ease-in-out">
-        <div className="w-full h-full border border-black rotate-45 flex items-center justify-center">
+        <div className="w-full h-full border border-white rotate-45 flex items-center justify-center">
           {/* Mobile-only Back label */}
           <span className="sm:hidden rotate-[315deg] text-xs font-bold text-white block">
             Back
@@ -227,7 +227,7 @@ export default function CameraPage() {
     </motion.div>
 
     {/* Desktop-only Back label outside diamond */}
-    <span className="hidden sm:inline font-black text-black mr-5 relative">Back</span>
+    <span className="hidden sm:inline font-black text-white mr-5 relative">Back</span>
   </Link>
 </div>
 
