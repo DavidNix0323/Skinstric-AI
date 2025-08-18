@@ -15,11 +15,27 @@ export default function SkinstricIntro() {
     window.addEventListener("resize", checkMobile);
     return () => window.removeEventListener("resize", checkMobile);
   }, []);
+  const [viewportWidth, setViewportWidth] = useState(0);
+
+  useEffect(() => {
+    const updateWidth = () => setViewportWidth(window.innerWidth);
+    updateWidth();
+    window.addEventListener("resize", updateWidth);
+    return () => window.removeEventListener("resize", updateWidth);
+  }, []);
+  
+  const maxShift = viewportWidth < 768
+  ? Math.min(viewportWidth * 0.4, 160) // more slide on mobile/small screens
+  : Math.min(viewportWidth * 0.25, 500); // full drama on desktop
+
+  
   const headlineShift = {
-    left: -500,
-    right: 500,
+    left: -maxShift,
+    right: maxShift,
     null: 0,
   };
+  
+  
   if (isMobile) {
     return (
       <section className="relative h-screen w-full bg-white text-[#1A1B1C] font-inter px-6 pt-6 flex items-center justify-center">
