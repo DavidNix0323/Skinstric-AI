@@ -63,8 +63,9 @@ export default function ResultPage() {
 )}
 
 
-  {/* Diamond Grid */}
-  <div className="grid grid-cols-3 grid-rows-3 gap-0 z-10">
+  {/* Diamond Grid Container */}
+<div className="w-full flex justify-center items-center py-6">
+  <div className="grid grid-cols-3 grid-rows-3 gap-0 z-10 max-w-[500px] sm:max-w-[600px] md:max-w-[700px]">
     {/* Demographics */}
     <div className="flex items-center justify-center col-start-2">
       <Link href="/summary">
@@ -72,9 +73,9 @@ export default function ResultPage() {
           onMouseEnter={() => setHovered("demographics")}
           onMouseLeave={() => setHovered("")}
           onClick={handleSummary}
-          className="w-[120px] h-[120px] sm:w-[154px] sm:h-[154px] bg-gray-200 hover:bg-gray-300 transform rotate-45 flex items-center justify-center -m-5 cursor-pointer font-semibold leading-[24px] tracking-tight uppercase hover:scale-[1.05] transition-transform duration-300"
+          className="w-[120px] h-[120px] sm:w-[140px] sm:h-[140px] md:w-[154px] md:h-[154px] bg-gray-200 hover:bg-gray-300 transform rotate-45 flex items-center justify-center -m-4 sm:-m-5 cursor-pointer font-semibold leading-tight tracking-tight uppercase hover:scale-[1.05] transition-transform duration-300"
         >
-          <span className="transform -rotate-45">Demographics</span>
+          <span className="transform -rotate-45 text-[12px] sm:text-[14px] md:text-[16px]">Demographics</span>
         </button>
       </Link>
     </div>
@@ -86,9 +87,9 @@ export default function ResultPage() {
         onMouseLeave={() => setHovered("")}
         onClick={(e) => e.preventDefault()}
         aria-disabled="true"
-        className="w-[120px] h-[120px] sm:w-[154px] sm:h-[154px] bg-gray-100 hover:bg-gray-300 transform rotate-45 flex items-center justify-center -m-5 font-semibold leading-[24px] tracking-tight uppercase cursor-not-allowed"
+        className="w-[120px] h-[120px] sm:w-[140px] sm:h-[140px] md:w-[154px] md:h-[154px] bg-gray-100 hover:bg-gray-300 transform rotate-45 flex items-center justify-center -m-4 sm:-m-5 font-semibold leading-tight tracking-tight uppercase cursor-not-allowed"
       >
-        <span className="transform -rotate-45">Cosmetic Concerns</span>
+        <span className="transform -rotate-45 text-[12px] sm:text-[14px] md:text-[16px]">Cosmetic Concerns</span>
       </button>
     </div>
 
@@ -99,9 +100,9 @@ export default function ResultPage() {
         onMouseLeave={() => setHovered("")}
         onClick={(e) => e.preventDefault()}
         aria-disabled="true"
-        className="w-[120px] h-[120px] sm:w-[154px] sm:h-[154px] bg-gray-100 hover:bg-gray-300 transform rotate-45 flex items-center justify-center -m-5 font-semibold leading-[24px] tracking-tight uppercase cursor-not-allowed"
+        className="w-[120px] h-[120px] sm:w-[140px] sm:h-[140px] md:w-[154px] md:h-[154px] bg-gray-100 hover:bg-gray-300 transform rotate-45 flex items-center justify-center -m-4 sm:-m-5 font-semibold leading-tight tracking-tight uppercase cursor-not-allowed"
       >
-        <span className="transform -rotate-45">Skin Type Details</span>
+        <span className="transform -rotate-45 text-[12px] sm:text-[14px] md:text-[16px]">Skin Type Details</span>
       </button>
     </div>
 
@@ -112,12 +113,14 @@ export default function ResultPage() {
         onMouseLeave={() => setHovered("")}
         onClick={(e) => e.preventDefault()}
         aria-disabled="true"
-        className="w-[120px] h-[120px] sm:w-[154px] sm:h-[154px] bg-gray-100 hover:bg-gray-300 transform rotate-45 flex items-center justify-center -m-5 font-semibold leading-[24px] tracking-tight uppercase cursor-not-allowed"
+        className="w-[120px] h-[120px] sm:w-[140px] sm:h-[140px] md:w-[154px] md:h-[154px] bg-gray-100 hover:bg-gray-300 transform rotate-45 flex items-center justify-center -m-4 sm:-m-5 font-semibold leading-tight tracking-tight uppercase cursor-not-allowed"
       >
-        <span className="transform -rotate-45">Weather</span>
+        <span className="transform -rotate-45 text-[12px] sm:text-[14px] md:text-[16px]">Weather</span>
       </button>
     </div>
   </div>
+</div>
+
 </div>
 
      {/* Bottom-left BACK button */}
